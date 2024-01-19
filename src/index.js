@@ -1,6 +1,6 @@
 if (navigator.serviceWorker) {
   // Register the SW
-  navigator.serviceWorker.register('/{horsediary}/firebase-messaging-sw.js', {scope: '/{horsediary}/'})
+  navigator.serviceWorker.register('/horsediary/firebase-messaging-sw.js', {scope: '/horsediary/'})
   .then(function(registration){
   }).catch(console.log);
 }
