@@ -5,14 +5,18 @@ body{
 }
 
 .topBar{
+    width: 100%;
+    position: fixed;
     background-color: #eeeeee;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 0.4em;
+    margin-top: 0px;
 }
 .appBody{
     background-color: #eeeeee;
+    /* position: relative; */
 }
 .rightGroup{
     display: flex;
@@ -25,11 +29,17 @@ body{
     justify-content: left;
 }
 button{
+    border-style: solid;
+    border-radius: 0.4em;
     margin: 0.4em;
     min-height: 36px;
     font-size: larger;
 }
-
+.infoBox{
+    width: 70%;
+    margin: auto;
+    padding: 70px 0;
+}
 
 .spLogin{
     display: none;
@@ -38,6 +48,9 @@ button{
     display: none;
 }
 
+.blueBorder{
+    border-color: blue !important;
+}
 .calendar{
     width: 100%;
     
@@ -51,7 +64,7 @@ button{
     padding:0.2em;
     display: flex;
     background-color: #fff;
-    border: #333;
+    border-color: #333;
     border-style: solid;
     border-width: 1px;
     border-radius: 8px;

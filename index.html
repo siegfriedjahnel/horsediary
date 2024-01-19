@@ -3,13 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>title</title>
-<meta name="author" content="name">
-<meta name="description" content="description here">
+<title>Horse diary</title>
+<meta name="author" content="Siegfried Jahnel">
+<meta name="description" content="Horse diary for multple users">
 <meta name="keywords" content="keywords,here">
 <link rel="shortcut icon" href="assets/favicon.png" >
 <link rel="stylesheet" href="src/styles.css" type="text/css">
 </head>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
+<script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyDw_akOHokaCObViq03C5fI3QTPzQk9w_o",
+    authDomain: "app4-50a59.firebaseapp.com",
+    databaseURL: "https://app4-50a59.firebaseio.com",
+    projectId: "app4-50a59",
+    storageBucket: "app4-50a59.appspot.com",
+    messagingSenderId: "390654674553",
+    appId: "1:390654674553:web:a1bf91e868d7d6b016b6a8",
+    measurementId: "G-GYC76LD1Q6"
+
+    //vapikey: "BKbiASBPlVaLh1_OFeonF7yOcRpmEaIOyAH1cFRVvqGCAcYhkDQJ_lNr2B4w2J4Yp5baLUUJp0gv98TWRkoOeBo"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+const messaging = firebase.messaging();
+  
+</script>
 <body>
     <div id="menu">
         <ul>
@@ -31,9 +52,9 @@
     </div>
 </div>
 <div id="dvAppBody" class="appBody">
-    <table class="calendar" id="tblCalendar"></table>
     <div id="dvCalendar" class="calendar"></div>
 </div>
+<div id="infoBox" class="infoBox"></div>
 </body>
 <script type="text/javascript" src="src/index.js"></script>
 </html>

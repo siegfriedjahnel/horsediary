@@ -33,3 +33,5 @@ case "insertEntry"://------------------------------
         
       case "getAllEntries"://---------------------------------------------
 ________________________________________
+token:
+ebx9fftXU_1HWz7CMQr-i6:APA91bHk9XsM9kPyEQJ1Lfo4KQ_TcNXD0K8GP919pY7cP0xAa3Q9u1SoKmMr4QOnc5_tbEAjkKo_vmVe4xmGXmHEit5iw_54-FBsydKrYJXeMbtuqKIa8Kc4QbSTWFZzN5gRJwwXpR5o
