@@ -9,9 +9,11 @@
 const btnNotify = document.getElementById("notify");
 const btnLogin = document.getElementById("login");
 const btnMenu = document.getElementById("btnMenu");
+const btnRefresh = document.getElementById("btnRefresh");
 const dvCalendar = document.getElementById("dvCalendar");
-const dvAppBody = document.getElementById("appBody");
-const infoBox = document.getElementById("infoBox");
+const dvAppBody = document.getElementById("dvAppBody");
+const infobox = document.getElementById("infobox");
+const btnAppInfo = document.getElementById("btnAppInfo")
 let entries = [];
 const users = ['Sigi','Heike','Verena','Nina','Mia'];
 let selectedHorse = "Blondie";
@@ -23,18 +25,24 @@ const today = new Date();
 const apiUrl = "https://sj-sam.de/apps/horsediary/api.php";
 //---------------------------------------------
 if (localStorage.user) {
-  btnLogin.innerHTML = "<img src='assets/logout-24.png'>";
+  btnLogin.innerHTML = "abmelden";
 } else {
-  btnLogin.innerHTML = "<img src='assets/face-24.png'>";
+  btnLogin.innerHTML = "anmelden";
 }
 
 if (localStorage.isSubscribed) {
-  btnNotify.innerHTML = "<img src='assets/notif-off-24.png'>";
+  btnNotify.innerHTML = "Push-Dienst beenden";
 } else {
-  console.log(localStorage.isSubscribed);
-  btnNotify.innerHTML = "<img src='assets/notify-24.png'>";
+  btnNotify.innerHTML = "Push-Dienst beantragen";
 }
 
+//--------------------------------------------
+btnRefresh.addEventListener("click", (e)=>{
+  location.reload();
+})
+btnAppInfo.addEventListener("click", ()=>{
+  infobox.innerHTML = location.href;
+})
 
 //-------------------------------------------------------------------------------
 btnMenu.addEventListener("click", (e) => {
@@ -43,6 +51,7 @@ btnMenu.addEventListener("click", (e) => {
 //-------------------------------------------------------------------------------
 
 btnNotify.addEventListener("click", (e) => {
+  closeMenu();
   if(!localStorage.tokenSaved){//no token yet
     if(confirm("willst du Push-Nachrichten über neue Einträge erhalten? ")){
 
@@ -64,7 +73,8 @@ btnNotify.addEventListener("click", (e) => {
               localStorage.tokenSaved = true;
               localStorage.isSubscribed = true;
               //update UI
-              btnNotify.innerHTML = "<img src='assets/notif-off-24.png'>";
+              btnNotify.innerHTML = "Pushdienst beenden";
+              showToast("Pushdiest aktiviert");
             }
           });
           console.log(currentToken);
@@ -90,7 +100,9 @@ btnNotify.addEventListener("click", (e) => {
         fetch(`https://sj-sam.de/apps/horsediary/api.php?action=updateSubscription&isSubscribed=0&token=${token}`).then((res)=>{
           if(res){
             localStorage.removeItem("isSubscribed");
-            btnNotify.innerHTML = "<img src='assets/notify-24.png'>";
+            btnNotify.innerHTML = "Pushdienst abbonieren";
+            showToast("Pushdiest deaktiviert");
+
           }
         });
       }else{
@@ -102,7 +114,9 @@ btnNotify.addEventListener("click", (e) => {
         fetch(`https://sj-sam.de/apps/horsediary/api.php?action=updateSubscription&isSubscribed=1&token=${token}`).then((res)=>{
           if(res){
             localStorage.isSubscribed = true;
-            btnNotify.innerHTML = "<img src='assets/notif-off-24.png'>";
+            btnNotify.innerHTML = "Pushdienst beenden";
+            showToast("Pushdiest aktiviert");
+
           }
         });
       }else{
@@ -142,22 +156,23 @@ function selectHorse(horse){
 //-------------------------------------------------------------------------------
 btnLogin.addEventListener("click", (e) => {
   if (!localStorage.user) {
-    const user = prompt("Benutzername");
-    //const pw = prompt("PIN");
+    const user = prompt("Benutzername").trim();
     if (!users.includes(user)) {
       showToast("Diesen user gibt es nicht");
       return;
     } else {
       localStorage.user = user;
+      closeMenu();
       showToast("Du bist jetzt angemeldet");
       //alert("du bist eingeloggt");
-      btnLogin.innerHTML = "<img src='assets/logout-24.png'>";
+      btnLogin.innerHTML = "abmelden";
       draw();
     }
   } else {
     if (confirm("Achtung! Du wirst abgemeldet")) {
       localStorage.removeItem("user");
-      btnLogin.innerHTML = "<img src='assets/face-24.png'>";
+      closeMenu();
+      btnLogin.innerHTML = "anmelden";
       showToast("Du bist jetzt angemeldet");
       //dvCalendar.innerHTML = "";
       draw();
@@ -172,10 +187,11 @@ getData().then(() => {
 //-----------------------------------------------------------------------------
 function draw() {
   dvCalendar.innerHTML = "";
-  infoBox.innerHTML = "";
+  infobox.innerHTML = "";
   if(!localStorage.user){
-    console.log("kein user");
-    infoBox.innerHTML = `Du musst dich anmelden um daten zu sehen. Clicke auf das Gesicht  <img src="assets/face-24.png" >`;
+    console.log("kein user------------");
+    openMenu();
+    infobox.innerHTML = "Du musst dich <b>anmelden</b> um daten zu sehen. ";
     return;
   }
   entries_filtered = entries.filter((entry) => entry.horse == selectedHorse);
@@ -265,12 +281,24 @@ function showToast(text) {
 }
 //----------------------------------------
 function toggleMenu() {
+  infobox.innerHTML = "";
   let m = document.getElementById("menu");
   if (m.className == "") {
     m.className = "show";
   } else {
     m.className = "";
   }
+}
+
+function closeMenu() {
+  infobox.innerHTML = "";
+  const m = document.getElementById("menu");
+    m.className = "";
+}
+function openMenu() {
+  infobox.innerHTML = "";
+  const m = document.getElementById("menu");
+    m.className = "show";
 }
 //-------------------------------------------
 

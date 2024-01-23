@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -7,7 +7,6 @@
 <meta name="author" content="Siegfried Jahnel">
 <meta name="description" content="Horse diary for multple users">
 <meta name="keywords" content="keywords,here">
-<link rel="shortcut icon" href="assets/favicon.png" >
 <link rel="stylesheet" href="src/styles.css" type="text/css">
 </head>
 <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
@@ -33,28 +32,34 @@ const messaging = firebase.messaging();
 </script>
 <body>
     <div id="menu">
-        <ul>
-          <li>Info</li>
-          <li>Share by whattsapp</li>
-          <li>Refresh</li>
-        </ul>
+          <p><span><button class="menuButton" id="notify"></button></span></p>
+          <p><span><button class="menuButton" id="login"></button></span></p>
+          <p><span><button class="menuButton" id="shareByWA">App teilen mit WhatsAp</button></span></p>
+          <p><span><button class="menuButton" id="sharebyQR">App teilen mit QR-Code</button></span></p>
+          <p><span><button class="menuButton" id="btnAppInfo">Infos zu dieser App</button></span></p>
+          <div id="infobox"></div>
       </div>
     <div id="toast"></div>
-<div id = "topBar" class="topBar">
-    <div class="leftGroup">
-        <span class="navButton"><button id="willy" onclick="selectHorse('Willy')">Willy</button></span>
-        <span class="navButton"><button id="blondie" onclick="selectHorse('Blondie')">Blondie</button></span>
-    </div>
-    <div class="rightGroup">
-        <span class="navButton"><button id="notify"></button></span>
-        <span class="navButton"><button id="login"></button></span>
-        <span class="navButton"><button id="btnMenu"><img src="assets/menu-24.png"></button></span>
-    </div>
-</div>
-<div id="dvAppBody" class="appBody">
-    <div id="dvCalendar" class="calendar"></div>
-</div>
-<div id="infoBox" class="infoBox"></div>
+    
+    <div id = "topBar" class="topBar">
+        <div class="leftGroup">
+            <span><button class="navButton" id="willy" onclick="selectHorse('Willy')">Willy</button></span>
+            <span><button class="navButton" id="blondie" onclick="selectHorse('Blondie')">Blondie</button></span>
+        </div>
+        
+        <div class="rightGroup">
+            <span><button class="navButton" id="btnRefresh"><img src="assets/refresh-24.png"></button></span>
+                <!-- <span class="navButton"><button id="login"></button></span> -->
+                <span><button class="navButton" id="btnMenu"><img src="assets/menu-24.png"></button></span>
+            </div>
+            
+        </div>
+        
+        <div id="dvAppBody" class="appBody">
+            <div id="dvCalendar" class="calendar"></div>
+        </div>
+        
+
 </body>
 <script type="text/javascript" src="src/index.js"></script>
 </html>
